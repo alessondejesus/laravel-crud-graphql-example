@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\GraphQL\Mutations;
+namespace App\GraphQL\Mutations\Brand;
 
 use App\Models\Brand;
 use GraphQL\Type\Definition\Type;
@@ -25,7 +25,6 @@ class UpdateBrandMutation extends Mutation
     {
         return [
             'id' => [
-                'name' => 'id',
                 'type' => Type::nonNull(Type::string()),
             ],
             'name' => [
@@ -39,9 +38,9 @@ class UpdateBrandMutation extends Mutation
         $brand = Brand::query()
             ->findOrFail($args['id']);
 
-        $brand->update([
-            'name' => $args['name'],
-        ]);
+        unset($args['id']);
+        
+        $brand->update($args);
 
         return $brand;
     }

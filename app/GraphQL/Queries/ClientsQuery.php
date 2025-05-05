@@ -4,25 +4,24 @@ declare(strict_types=1);
 
 namespace App\GraphQL\Queries;
 
-use App\Models\Product;
 use Closure;
+use App\Models\Client;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 use Rebing\GraphQL\Support\SelectFields;
 
-class ProductsQuery extends Query
+class ClientsQuery extends Query
 {
     protected $attributes = [
-        'name' => 'products',
-        'description' => 'A list of products',
-        'model' => Product::class,
+        'name' => 'clients',
+        'description' => 'A query'
     ];
 
     public function type(): Type
     {
-        return GraphQL::paginate('Product');
+        return GraphQL::paginate('Client');
     }
 
     public function args(): array
@@ -34,7 +33,7 @@ class ProductsQuery extends Query
             'name' => [
                 'type' => Type::string(),
             ],
-            'brand_id' => [
+            'email' => [
                 'type' => Type::string(),
             ],
             'page' => [
@@ -51,12 +50,10 @@ class ProductsQuery extends Query
         /** @var SelectFields $fields */
         $fields = $getSelectFields();
         $select = $fields->getSelect();
-        $with = $fields->getRelations();
         
-        $products = Product::filter($args)
-            ->select($select)
-            ->with($with);
+        $clients = Client::filter($args)
+            ->select($select);
 
-        return $products->paginate($args['limit'], ['*'], 'page', $args['page']);
+        return $clients->paginate($args['limit'], ['*'], 'page', $args['page']);
     }
 }

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\GraphQL\Mutations;
+namespace App\GraphQL\Mutations\Product;
 
-use App\Models\Brand;
+use App\Models\Product;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Mutation;
 
-class DeleteBrandMutation extends Mutation
+class DeleteProductMutation extends Mutation
 {
     protected $attributes = [
-        'name' => 'deleteBrand',
-        'description' => 'A mutation'
+        'name' => 'deleteProduct',
+        'description' => 'Delete a Product'
     ];
 
     public function type(): Type
@@ -25,14 +25,14 @@ class DeleteBrandMutation extends Mutation
         return [
             'id' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'ID of the Brand that will be deleted',
+                'description' => 'ID of the Product that will be deleted',
             ],
         ];
     }
 
     public function resolve($root, array $args)
     {
-        $product = Brand::query()
+        $product = Product::query()
             ->findOrFail($args['id']);
 
         return $product->delete();

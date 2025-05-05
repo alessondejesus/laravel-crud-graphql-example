@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\GraphQL\Mutations;
+namespace App\GraphQL\Mutations\Brand;
 
 use App\Models\Brand;
 use GraphQL\Type\Definition\Type;
@@ -34,8 +34,6 @@ class CreateBrandMutation extends Mutation
     public function resolve($root, array $args)
     {
         return Brand::query()
-            ->create([
-                'name' => $args['name'],
-            ]);
+            ->create($args);
     }
 }
