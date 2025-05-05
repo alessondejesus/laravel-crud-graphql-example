@@ -21,17 +21,20 @@ return [
                 \App\GraphQL\Queries\BrandsQuery::class,
                 \App\GraphQL\Queries\ProductsQuery::class,
                 \App\GraphQL\Queries\ClientsQuery::class,
+                \App\GraphQL\Queries\InventoriesQuery::class,
             ],
             'mutation' => [
                  ...\App\GraphQL\Mutations\Brand\BrandMutationMapping::MUTATIONS,
                  ...\App\GraphQL\Mutations\Client\ClientMutationMapping::MUTATIONS,
                  ...\App\GraphQL\Mutations\Product\ProductMutationMapping::MUTATIONS,
+                 ...\App\GraphQL\Mutations\Stock\StockMutationMapping::MUTATIONS,
             ],
             
             'types' => [
                 \App\GraphQL\Types\BrandType::class,
                 \App\GraphQL\Types\ProductType::class,
                 \App\GraphQL\Types\ClientType::class,
+                \App\GraphQL\Types\StockType::class,
             ],
 
             'middleware' => null,

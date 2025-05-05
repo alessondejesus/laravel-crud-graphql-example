@@ -14,6 +14,5 @@ class Stock extends Model
         'product_id',
         'amount',
         'unit_type',
-        'amount_type',
     ];
 }

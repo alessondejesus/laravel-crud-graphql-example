@@ -16,8 +16,10 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('product_id');
             $table->bigInteger('amount');
-            $table->enum('unit_type', [array_column(StockUnitTypeEnum::cases(), 'name')])->index();
+            $table->enum('unit_type', [array_column(StockUnitTypeEnum::cases(), 'name')]);
             $table->timestamps();
+            
+            $table->index(['product_id', 'unit_type']);
         });
     }
 

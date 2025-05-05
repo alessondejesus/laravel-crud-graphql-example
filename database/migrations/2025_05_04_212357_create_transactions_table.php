@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('stock_id');
+            $table->foreignUuid('client_id');
             $table->timestamps();
         });
     }
